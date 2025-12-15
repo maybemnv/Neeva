@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Pause, Volume2, VolumeX, ArrowLeft, Wind, Sparkles } from 'lucide-react';
+import { Play, Pause, ArrowLeft, Wind, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const FocusFlow = () => {
