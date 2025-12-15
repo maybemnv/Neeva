@@ -1,13 +1,50 @@
+# Environment variables
+.env
+.env.local
+.env.*.local
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+.venv/
+venv/
+ENV/
+env/
+env.bak/
+venv.bak/
+*.egg-info/
+dist/
+build/
+
+# Database
+*.db
+*.sqlite
+*.sqlite3
+
 # Logs
 logs
 *.log
+*.log.*
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
+# Debug/Test Scripts
+debug_*.py
+test_*.py
+check_*.py
+reproduce_*.py
+trigger_*.py
+download_audio.py
+
+# Node
+node_modules/
 dist
 dist-ssr
 *.local
@@ -22,6 +59,6 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-.venv/
-.env
-public/
+
+# OS
+Thumbs.db

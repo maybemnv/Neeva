@@ -227,7 +227,7 @@ const Wellness = () => {
                 clearInterval(timerRef.current);
             }
         };
-    }, [isPlaying]);
+    }, [isPlaying, timeRemaining]);
 
 
 
