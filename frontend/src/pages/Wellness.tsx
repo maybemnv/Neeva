@@ -12,18 +12,7 @@ declare global {
     }
 }
 
-const Wellness = () => {
-    const [activeExercise, setActiveExercise] = useState<string | null>(null);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [isMuted, setIsMuted] = useState(false);
-    const [timeRemaining, setTimeRemaining] = useState(0);
-    const [youtubePlayer, setYoutubePlayer] = useState<any>(null);
-    const timerRef = useRef<number | null>(null);
-    const playerRef = useRef<HTMLDivElement>(null);
-    const queryClient = useQueryClient();
-
-    // YouTube Audio Library tracks (all from YouTube Audio Library - royalty free)
-    const exercises = [
+const exercises = [
         {
             id: 'basic-breathing',
             title: 'Basic Breathing',
@@ -85,6 +74,16 @@ const Wellness = () => {
             youtubeId: 'UfcAVejslrU' // Ocean Waves
         },
     ];
+
+const Wellness = () => {
+    const [activeExercise, setActiveExercise] = useState<string | null>(null);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [isMuted, setIsMuted] = useState(false);
+    const [timeRemaining, setTimeRemaining] = useState(0);
+    const [youtubePlayer, setYoutubePlayer] = useState<any>(null);
+    const timerRef = useRef<number | null>(null);
+    const playerRef = useRef<HTMLDivElement>(null);
+    const queryClient = useQueryClient();
 
     const activeExerciseData = exercises.find(ex => ex.id === activeExercise);
 
@@ -203,31 +202,21 @@ const Wellness = () => {
     }, [activeExercise, activeExerciseData]);
 
     useEffect(() => {
+        let interval: any;
         if (isPlaying && timeRemaining > 0) {
-            timerRef.current = window.setInterval(() => {
+            interval = setInterval(() => {
                 setTimeRemaining(prev => {
                     if (prev <= 1) {
-                        if (timerRef.current) {
-                            clearInterval(timerRef.current);
-                        }
+                        clearInterval(interval);
                         handleComplete();
                         return 0;
                     }
                     return prev - 1;
                 });
             }, 1000);
-        } else {
-            if (timerRef.current) {
-                clearInterval(timerRef.current);
-            }
         }
-
-        return () => {
-            if (timerRef.current) {
-                clearInterval(timerRef.current);
-            }
-        };
-    }, [isPlaying, timeRemaining]);
+        return () => clearInterval(interval);
+    }, [isPlaying]);
 
 
 
