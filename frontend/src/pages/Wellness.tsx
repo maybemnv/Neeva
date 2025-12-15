@@ -81,7 +81,6 @@ const Wellness = () => {
     const [isMuted, setIsMuted] = useState(false);
     const [timeRemaining, setTimeRemaining] = useState(0);
     const [youtubePlayer, setYoutubePlayer] = useState<any>(null);
-    const timerRef = useRef<number | null>(null);
     const playerRef = useRef<HTMLDivElement>(null);
     const queryClient = useQueryClient();
 
