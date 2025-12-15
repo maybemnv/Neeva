@@ -1,12 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Play, Pause, RefreshCw, Trophy, Brain, Wind, Activity } from 'lucide-react';
+import { Play, Pause, Volume2, VolumeX, ArrowLeft, Wind, Sparkles } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const FocusFlow = () => {
     const [isActive, setIsActive] = useState(false);
-    const [count, setCount] = useState(0);
-    // const [phase, setPhase] = useState('Inhale'); // Inhale, Hold, Exhale, Hold
+    const [phase, setPhase] = useState('Inhale'); // Inhale, Hold, Exhale, Hold
+    const [, setCount] = useState(0);
 
     useEffect(() => {
         let interval: any;
@@ -14,10 +14,10 @@ const FocusFlow = () => {
             interval = setInterval(() => {
                 setCount((c) => {
                     const newCount = (c + 1) % 16;
-                    // if (newCount >= 0 && newCount < 4) setPhase('Inhale');
-                    // else if (newCount >= 4 && newCount < 8) setPhase('Hold');
-                    // else if (newCount >= 8 && newCount < 12) setPhase('Exhale');
-                    // else setPhase('Hold');
+                    if (newCount >= 0 && newCount < 4) setPhase('Inhale');
+                    else if (newCount >= 4 && newCount < 8) setPhase('Hold');
+                    else if (newCount >= 8 && newCount < 12) setPhase('Exhale');
+                    else setPhase('Hold');
                     return newCount;
                 });
             }, 1000);
@@ -30,20 +30,20 @@ const FocusFlow = () => {
             <div className="relative flex items-center justify-center w-64 h-64">
                 <motion.div
                     animate={{
-                        scale: 'Inhale' === 'Inhale' ? 1.5 : 'Exhale' === 'Exhale' ? 1 : 1.5,
-                        opacity: 'Hold' === 'Hold' ? 0.8 : 1,
+                        scale: phase === 'Inhale' ? 1.5 : phase === 'Exhale' ? 1 : 1.5,
+                        opacity: phase === 'Hold' ? 0.8 : 1,
                     }}
                     transition={{ duration: 4, ease: "easeInOut" }}
                     className="absolute inset-0 bg-gradient-to-br from-purple-500/30 to-blue-500/30 rounded-full blur-3xl"
                 />
                 <motion.div
                     animate={{
-                        scale: 'Inhale' === 'Inhale' ? 1.2 : 'Exhale' === 'Exhale' ? 0.8 : 1.2,
+                        scale: phase === 'Inhale' ? 1.2 : phase === 'Exhale' ? 0.8 : 1.2,
                     }}
                     transition={{ duration: 4, ease: "easeInOut" }}
                     className="w-48 h-48 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center shadow-2xl"
                 >
-                    <span className="text-2xl font-bold text-gray-800">{'Inhale'}</span>
+                    <span className="text-2xl font-bold text-gray-800">{phase}</span>
                 </motion.div>
             </div>
             <button

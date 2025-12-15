@@ -10,7 +10,7 @@ const Chat = () => {
     const messagesEndRef = useRef<HTMLDivElement>(null);
     const queryClient = useQueryClient();
 
-    const { data: history, isLoading: isHistoryLoading } = useQuery({
+    const { data: chatHistory, isLoading: isLoading } = useQuery({
         queryKey: ['chatHistory'],
         queryFn: async () => {
             try {
