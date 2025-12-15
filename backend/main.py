@@ -1,0 +1,34 @@
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+from app.middleware.error_logging import ErrorLoggingMiddleware
+
+app = FastAPI(title="Neeva API", description="AI Mental Wellness Companion API")
+
+# Add error logging middleware FIRST
+app.add_middleware(ErrorLoggingMiddleware)
+
+# CORS Configuration
+origins = [
+    "http://localhost:5173",  # Vite default port
+    "http://localhost:3000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+from app.api.api import api_router
+
+app.include_router(api_router, prefix="/api")
+
+@app.get("/")
+async def root():
+    return {"message": "Welcome to Neeva API"}
+
+@app.get("/health")
+async def health_check():
+    return {"status": "healthy"}
