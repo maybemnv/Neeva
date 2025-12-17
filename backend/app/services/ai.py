@@ -48,7 +48,7 @@ def get_chat_response(message_history: list, user_data: dict = None) -> str:
         
         chat_completion = client.chat.completions.create(
             messages=messages,
-            model="llama-3.3-70b-versatile",
+            model="moonshotai/kimi-k2-instruct-0905",
             temperature=0.7,
             max_tokens=1024,
         )
